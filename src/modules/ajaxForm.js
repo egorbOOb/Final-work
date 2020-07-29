@@ -20,19 +20,15 @@ const sendForm = (selector) => {
         });
     };
 
-    const phoneValidator = (target) => {
+    const phoneValidator = (target, e) => {
         let val = target.value.length;
         if (val <= 12) {
             console.log(12);
-            let validator = /[^0-9\+]/;
+            let validator = /[^0-9+]/;
             target.value = target.value.replace(validator, '');
         } else {
-            target.value = '';
-            const inputVal = target.value;
-            console.log(inputVal);
-            target.value = target.value.replace(/[^0-9\+][\S\s]/, '');
-
-            target.value = inputVal;
+            let val = target.value.match(/[0-9+]{12}/);
+            target.value = val;
         }
     };
 
@@ -44,7 +40,7 @@ const sendForm = (selector) => {
         let target = e.target;
 
         if (target.matches('.phone-user')) {
-            phoneValidator(target);
+            phoneValidator(target, e);
         } else if (target.matches('#name_2') || target.matches('#name_1') || target.matches('#name_11') || target.matches('#name_13')) {
             nameValidator(target);
         }
